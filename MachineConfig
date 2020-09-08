@@ -1,0 +1,297 @@
+[cloud-user@igarciam-jumpserver ~]$ oc get co
+NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
+authentication                             4.4.3     True        False         False      50d
+cloud-credential                           4.4.3     True        False         False      118d
+cluster-autoscaler                         4.4.3     True        False         False      118d
+console                                    4.4.3     True        False         False      50d
+csi-snapshot-controller                    4.4.3     True        False         False      6d15h
+dns                                        4.4.3     True        False         False      118d
+etcd                                       4.4.3     True        False         False      17h
+image-registry                             4.4.3     True        False         False      50d
+ingress                                    4.4.3     True        False         False      50d
+insights                                   4.4.3     True        False         False      118d
+kube-apiserver                             4.4.3     True        False         False      118d
+kube-controller-manager                    4.4.3     True        False         False      118d
+kube-scheduler                             4.4.3     True        False         False      118d
+kube-storage-version-migrator              4.4.3     True        False         False      50d
+machine-api                                4.4.3     True        False         False      118d
+machine-config                             4.4.3     True        False         False      51d
+marketplace                                4.4.3     True        False         False      50d
+monitoring                                 4.4.3     True        False         False      21d
+network                                    4.4.3     True        False         False      118d
+node-tuning                                4.4.3     True        False         False      118d
+openshift-apiserver                        4.4.3     True        False         False      11d
+openshift-controller-manager               4.4.3     True        False         False      26d
+openshift-samples                          4.4.3     True        False         False      118d
+operator-lifecycle-manager                 4.4.3     True        False         False      118d
+operator-lifecycle-manager-catalog         4.4.3     True        False         False      118d
+operator-lifecycle-manager-packageserver   4.4.3     True        False         False      11d
+service-ca                                 4.4.3     True        False         False      118d
+service-catalog-apiserver                  4.4.3     True        False         False      118d
+service-catalog-controller-manager         4.4.3     True        False         False      118d
+storage 
+
+[cloud-user@igarciam-jumpserver ~]$ oc get co machine-config
+NAME             VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
+machine-config   4.4.3     True        False         False      51d
+
+[cloud-user@igarciam-jumpserver ~]$ oc describe co machine-config
+Name:         machine-config
+Namespace:    
+Labels:       <none>
+Annotations:  <none>
+API Version:  config.openshift.io/v1
+Kind:         ClusterOperator
+Metadata:
+  Creation Timestamp:  2020-05-12T10:27:31Z
+  Generation:          1
+  Resource Version:    34363743
+  Self Link:           /apis/config.openshift.io/v1/clusteroperators/machine-config
+  UID:                 848418c5-da12-4ddc-b499-53aff46ad9dd
+Spec:
+Status:
+  Conditions:
+    Last Transition Time:  2020-07-19T07:50:20Z
+    Message:               Cluster has deployed 4.4.3
+    Status:                True
+    Type:                  Available
+    Last Transition Time:  2020-05-12T10:30:40Z
+    Message:               Cluster version is 4.4.3
+    Status:                False
+    Type:                  Progressing
+    Last Transition Time:  2020-07-19T07:50:20Z
+    Status:                False
+    Type:                  Degraded
+    Last Transition Time:  2020-05-12T10:30:39Z
+    Reason:                AsExpected
+    Status:                True
+    Type:                  Upgradeable
+  Extension:
+  Related Objects:
+    Group:     
+    Name:      openshift-machine-config-operator
+    Resource:  namespaces
+    Group:     machineconfiguration.openshift.io
+    Name:      master
+    Resource:  machineconfigpools
+    Group:     machineconfiguration.openshift.io
+    Name:      worker
+    Resource:  machineconfigpools
+    Group:     machineconfiguration.openshift.io
+    Name:      machine-config-controller
+    Resource:  controllerconfigs
+  Versions:
+    Name:     operator
+    Version:  4.4.3
+Events:       <none>
+
+[cloud-user@igarciam-jumpserver ~]$ oc get machineconfigpools
+NAME     CONFIG                                             UPDATED   UPDATING   DEGRADED   MACHINECOUNT   READYMACHINECOUNT   UPDATEDMACHINECOUNT   DEGRADEDMACHINECOUNT   AGE
+master   rendered-master-248fda3aa41684b055d9e7ccccda25d2   True      False      False      3              3                   3                     0                      118d
+worker   rendered-worker-81ddc84e609cc1ed263415c84c3c4faa   True      False      False      4              4                   4                     0                      118d
+
+
+[cloud-user@igarciam-jumpserver ~]$ oc get machineconfig
+NAME                                                        GENERATEDBYCONTROLLER                      IGNITIONVERSION   AGE
+00-master                                                   910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+00-worker                                                   910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+01-master-container-runtime                                 910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+01-master-kubelet                                           910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+01-worker-container-runtime                                 910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+01-worker-kubelet                                           910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+99-master-9ad21971-b8b2-460d-ad9a-f4100adaf1e8-registries   910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+99-master-ssh                                                                                          2.2.0             104d
+99-worker-322b23e8-c80d-4c20-9aa7-a48528524df3-registries   910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+99-worker-ssh                                                                                          2.2.0             104d
+rendered-master-248fda3aa41684b055d9e7ccccda25d2            910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             104d
+rendered-master-b56fd7f24113bdf54ccd24f576e00fa2            910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             104d
+rendered-master-dc44ce77f5a42285f5dc96d042550e36            910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+rendered-worker-3e2b042f26f6d817a1c0df96887748f4            910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             118d
+rendered-worker-81ddc84e609cc1ed263415c84c3c4faa            910f22cb1550ad7bb02b82c5dc05062b1566ce5f   2.2.0             104d
+
+
+
+[cloud-user@igarciam-jumpserver ~]$ oc describe machineconfigpools 
+Name:         master
+Namespace:    
+Labels:       machineconfiguration.openshift.io/mco-built-in=
+              operator.machineconfiguration.openshift.io/required-for-upgrade=
+Annotations:  <none>
+API Version:  machineconfiguration.openshift.io/v1
+Kind:         MachineConfigPool
+Metadata:
+  Creation Timestamp:  2020-05-12T10:27:36Z
+  Generation:          5
+  Resource Version:    34375047
+  Self Link:           /apis/machineconfiguration.openshift.io/v1/machineconfigpools/master
+  UID:                 9ad21971-b8b2-460d-ad9a-f4100adaf1e8
+Spec:
+  Configuration:
+    Name:  rendered-master-248fda3aa41684b055d9e7ccccda25d2
+    Source:
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         00-master
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         01-master-container-runtime
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         01-master-kubelet
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         99-master-9ad21971-b8b2-460d-ad9a-f4100adaf1e8-registries
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         99-master-ssh
+  Machine Config Selector:
+    Match Labels:
+      machineconfiguration.openshift.io/role:  master
+  Node Selector:
+    Match Labels:
+      node-role.kubernetes.io/master:  
+  Paused:                              false
+Status:
+  Conditions:
+    Last Transition Time:  2020-05-12T10:28:08Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  RenderDegraded
+    Last Transition Time:  2020-05-12T10:28:13Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  NodeDegraded
+    Last Transition Time:  2020-05-12T10:28:13Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  Degraded
+    Last Transition Time:  2020-07-19T08:31:03Z
+    Message:               All nodes are updated with rendered-master-248fda3aa41684b055d9e7ccccda25d2
+    Reason:                
+    Status:                True
+    Type:                  Updated
+    Last Transition Time:  2020-07-19T08:31:03Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  Updating
+  Configuration:
+    Name:  rendered-master-248fda3aa41684b055d9e7ccccda25d2
+    Source:
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   00-master
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   01-master-container-runtime
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   01-master-kubelet
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   99-master-9ad21971-b8b2-460d-ad9a-f4100adaf1e8-registries
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   99-master-ssh
+  Degraded Machine Count:     0
+  Machine Count:              3
+  Observed Generation:        5
+  Ready Machine Count:        3
+  Unavailable Machine Count:  0
+  Updated Machine Count:      3
+Events:                       <none>
+
+
+Name:         worker
+Namespace:    
+Labels:       machineconfiguration.openshift.io/mco-built-in=
+Annotations:  <none>
+API Version:  machineconfiguration.openshift.io/v1
+Kind:         MachineConfigPool
+Metadata:
+  Creation Timestamp:  2020-05-12T10:27:36Z
+  Generation:          3
+  Resource Version:    65528162
+  Self Link:           /apis/machineconfiguration.openshift.io/v1/machineconfigpools/worker
+  UID:                 322b23e8-c80d-4c20-9aa7-a48528524df3
+Spec:
+  Configuration:
+    Name:  rendered-worker-81ddc84e609cc1ed263415c84c3c4faa
+    Source:
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         00-worker
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         01-worker-container-runtime
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         01-worker-kubelet
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         99-worker-322b23e8-c80d-4c20-9aa7-a48528524df3-registries
+      API Version:  machineconfiguration.openshift.io/v1
+      Kind:         MachineConfig
+      Name:         99-worker-ssh
+  Machine Config Selector:
+    Match Labels:
+      machineconfiguration.openshift.io/role:  worker
+  Node Selector:
+    Match Labels:
+      node-role.kubernetes.io/worker:  
+  Paused:                              false
+Status:
+  Conditions:
+    Last Transition Time:  2020-05-12T10:28:08Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  RenderDegraded
+    Last Transition Time:  2020-05-12T10:28:13Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  NodeDegraded
+    Last Transition Time:  2020-05-12T10:28:13Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  Degraded
+    Last Transition Time:  2020-09-02T09:40:00Z
+    Message:               All nodes are updated with rendered-worker-81ddc84e609cc1ed263415c84c3c4faa
+    Reason:                
+    Status:                True
+    Type:                  Updated
+    Last Transition Time:  2020-09-02T09:40:00Z
+    Message:               
+    Reason:                
+    Status:                False
+    Type:                  Updating
+  Configuration:
+    Name:  rendered-worker-81ddc84e609cc1ed263415c84c3c4faa
+    Source:
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   00-worker
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   01-worker-container-runtime
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   01-worker-kubelet
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   99-worker-322b23e8-c80d-4c20-9aa7-a48528524df3-registries
+      API Version:            machineconfiguration.openshift.io/v1
+      Kind:                   MachineConfig
+      Name:                   99-worker-ssh
+  Degraded Machine Count:     0
+  Machine Count:              4
+  Observed Generation:        3
+  Ready Machine Count:        4
+  Unavailable Machine Count:  0
+  Updated Machine Count:      4
+Events:                       <none>
